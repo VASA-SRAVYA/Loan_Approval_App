@@ -1,0 +1,105 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Loan Approval Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container mt-5 p-4 bg-white shadow rounded" style="max-width: 800px;">
+    <h2 class="text-center mb-4">Loan Approval Prediction App</h2>
+    <form action="/predict" method="post">
+
+      <div class="row">
+        <!-- Dropdowns with placeholders -->
+        <div class="col-md-6 form-group">
+          <label>Gender</label>
+          <select name="Gender" class="form-control" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Married</label>
+          <select name="Married" class="form-control" required>
+            <option value="" disabled selected>Are you married?</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Dependents</label>
+          <select name="Dependents" class="form-control" required>
+            <option value="" disabled selected>Select Dependents</option>
+            <option>0</option><option>1</option><option>2</option><option>3+</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Education</label>
+          <select name="Education" class="form-control" required>
+            <option value="" disabled selected>Select Education</option>
+            <option>Graduate</option>
+            <option>Not Graduate</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Self Employed</label>
+          <select name="Self_Employed" class="form-control" required>
+            <option value="" disabled selected>Are you self-employed?</option>
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </div>
+
+        <!-- Numeric Inputs -->
+        <div class="col-md-6 form-group">
+          <label>Applicant Income</label>
+          <input type="number" name="ApplicantIncome" class="form-control" placeholder="e.g., 5000" required>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Coapplicant Income</label>
+          <input type="number" name="CoapplicantIncome" class="form-control" placeholder="e.g., 2000" required>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Loan Amount (in thousands)</label>
+          <input type="number" name="LoanAmount" class="form-control" placeholder="e.g., 150" required>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Loan Amount Term (in days)</label>
+          <input type="number" name="Loan_Amount_Term" class="form-control" placeholder="e.g., 360" required>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Credit History (1 = Good, 0 = Bad)</label>
+          <input type="number" name="Credit_History" class="form-control" min="0" max="1" step="1" required>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label>Property Area</label>
+          <select name="Property_Area" class="form-control" required>
+            <option value="" disabled selected>Select Area</option>
+            <option>Urban</option><option>Semiurban</option><option>Rural</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3 btn-block">🔍 Predict Loan Status</button>
+    </form>
+
+    {% if prediction_text %}
+      <div class="alert alert-info mt-4 text-center">
+        {{ prediction_text }}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
